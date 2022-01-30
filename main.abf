@@ -27,7 +27,3 @@ Anything outside of a thread will not run
 , Gets input from user
 [ Starts loop
 ] Goes to matching bracket if current cell is 0
-{ Starts Thread with whatever name before the |
-} Ends thread
-( Checks if the thread is done then runs the code after it
-) You don't actually need this, this is just for looks
