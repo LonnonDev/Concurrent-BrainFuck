@@ -1,0 +1,33 @@
+{1| Start a thread and name it 1
+    ++ Do operation 2 times
+    [
+        > ++ Add two to cell 2
+        < - Subtract one from cell 1
+    ] Should be 4 in Cell 2
+} End the thread when complete
+{2| Start a new thread and name it 2
+    >> +++ Add 3 to cell 3
+}
+{end| Start another thread and name it end
+    (1| Wait till thread 1 and 2 are done then execute code
+        (2|
+            > : Output cell 2
+            > : Output cell 3
+        )
+    )
+}
+
+Anything outside of a thread will not run
++ Increments Current Cell
+- Decremenets Current Cell
+> Moves Pointer to the Right
+< Moves Pointer to the Left
+: Prints value of cell
+. Prints the char in the cell
+, Gets input from user
+[ Starts loop
+] Goes to matching bracket if current cell is 0
+{name| Starts Thread with whatever name before the |
+} Ends thread
+(name| Checks if the thread is done then runs the code after it
+) You don't actually need this, this is just for looks
