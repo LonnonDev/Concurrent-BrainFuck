@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
-use std::{thread, cell};
+use std::{thread};
 
 use crate::lexer::{Threads, Tokens};
 
@@ -53,8 +53,18 @@ pub fn parse(input: Vec<Threads>) {
                         (*cells.lock().unwrap()).push(input.trim().parse::<isize>().unwrap());
                     },
                     Tokens::StartLoop => {
-                        loop_start.push(x);
-                        loop_deep += 1;
+                        if (*cells.lock().unwrap())[current_cell as usize] != 0 {
+                            loop_start.push(x);
+                            loop_deep += 1;
+                        }
+                        // find end of loop
+                        let mut end_loop = 0;
+                        for y in 0..threads.tokens.len() {
+                            if threads.tokens[y] == Tokens::EndLoop && y > end_loop{
+                                end_loop = y - 3;
+                            }
+                        }
+                        x += end_loop;
                     },
                     Tokens::EndLoop => {
                         if (*cells.lock().unwrap())[current_cell as usize] != 0 {
@@ -75,7 +85,7 @@ pub fn parse(input: Vec<Threads>) {
             // println!("Thread '{}' finished: {:?}", threads.name, cells.lock().unwrap());
             (*threads_status.lock().unwrap()).insert(threads.name.clone(), false);
         });
-        let res = thread_join_handle.join().unwrap();
+        let _ = thread_join_handle.join().unwrap();
     }
     // println!("End: {:?}", cells_arc.clone().lock().unwrap());
 }

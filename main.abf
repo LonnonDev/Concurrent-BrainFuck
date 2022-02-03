@@ -1,3 +1,5 @@
+
+  
 {1| Start a thread and name it 1
     ++ Do operation 2 times
     [
@@ -7,6 +9,14 @@
 } End the thread when complete
 {2| Start a new thread and name it 2
     >> +++ Add 3 to cell 3
+}
+{3|
+    >>>> Go to cell 4
+    [ Check if it passes this loop
+        > +
+        <
+    ]
+    > : Check cell 4 if 1 then failed if 0 then passed
 }
 {end| Start another thread and name it end
     (1| Wait till thread 1 and 2 are done then execute code
@@ -25,5 +35,5 @@ Anything outside of a thread will not run
 : Prints value of cell
 . Prints the char in the cell
 , Gets input from user
-[ Starts loop
-] Goes to matching bracket if current cell is 0
+[ Starts loop if cell is not 0
+] Goes to matching bracket if current cell is not 0
